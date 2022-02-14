@@ -4,6 +4,7 @@ namespace TabloidCLI
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
             // MainMenuManager implements the IUserInterfaceManager interface
