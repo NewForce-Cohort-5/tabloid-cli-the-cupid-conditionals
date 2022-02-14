@@ -18,10 +18,10 @@ namespace TabloidCLI.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT id,
-                                                                                                             Title
-                                        Url 
-                                        PublishDateTime
-                                        AuthorId
+                                                                                                             Title,
+                                        Url, 
+                                        PublishDateTime,
+                                        AuthorId,
                                         BlogId 
                                           FROM Post";
 
@@ -36,9 +36,9 @@ namespace TabloidCLI.Repositories
 
                             Title = reader.GetString(reader.GetOrdinal("Title")),
 
-                            Url = reader.GetString(reader.GetOrdinal("URL")),
+                            Url = reader.GetString(reader.GetOrdinal("Url")),
 
-                            //PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime")),
+                            PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime")),
 
 
                         };
