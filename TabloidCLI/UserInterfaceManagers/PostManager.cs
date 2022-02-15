@@ -68,12 +68,74 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void List()
         {
-            //Console.WriteLine("Hello");
+            
             List<Post> posts = _postRepository.GetAll();
             foreach (Post post in posts)
             {
                 Console.WriteLine($"\nTitle: {post.Title}");
                 Console.WriteLine($"\nURL: {post.Url}\n");
+            }
+        }
+
+        private Author AChoose(string prompt = null)
+        {
+            if (prompt == null)
+            {
+                prompt = "Please choose an Author:";
+            }
+
+            Console.WriteLine(prompt);
+
+            List<Author> authors = _authorRepository.GetAll();
+
+            for (int i = 0; i < authors.Count; i++)
+            {
+                Author author = authors[i];
+                Console.WriteLine($" {i + 1}) {author.FullName}");
+            }
+            Console.Write("> ");
+
+            string input = Console.ReadLine();
+            try
+            {
+                int choice = int.Parse(input);
+                return authors[choice - 1];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid Selection");
+                return null;
+            }
+        }
+
+        private Blog BChoose(string prompt = null)
+        {
+            if (prompt == null)
+            {
+                prompt = "Please choose a Blog:";
+            }
+
+            Console.WriteLine(prompt);
+
+            List<Blog> blogs = _blogRepository.GetAll();
+
+            for (int i = 0; i < blogs.Count; i++)
+            {
+                Blog blog = blogs[i];
+                Console.WriteLine($" {i + 1}) {blog.Title}");
+            }
+            Console.Write("> ");
+
+            string input = Console.ReadLine();
+            try
+            {
+                int choice = int.Parse(input);
+                return blogs[choice - 1];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid Selection");
+                return null;
             }
         }
 
@@ -123,14 +185,11 @@ namespace TabloidCLI.UserInterfaceManagers
             post.PublishDateTime = DateTime.Parse(Console.ReadLine());
             //post.PublishDateTime =DateTime.Now;
 
-            //list of authors
-
-            //Console.Write("Author: ");
-
-            //string userInputAuthor = ;
-            //post.Author = Console.ReadLine(); 
-            //Author findAuthor = Where(userInputAuthor == Author.Name)
-
+            //list of authors and select
+                        
+            post.Author = AChoose();
+            post.Blog = BChoose();
+            
             
 
                 _postRepository.Insert(post);
