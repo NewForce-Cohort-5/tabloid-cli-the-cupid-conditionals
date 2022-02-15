@@ -80,7 +80,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             if (prompt == null)
             {
-                prompt = "Please choose an Tag:";
+                prompt = "Please choose a blog:";
             }
 
             Console.WriteLine(prompt);
@@ -147,7 +147,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Blog BlogToDelete = Choose("Which blog would you like to remove?");
             if (BlogToDelete != null)
             {
-                _blogRepository.Delete(blogToDelete.Id);
+                _blogRepository.Delete(BlogToDelete.Id);
             }
         }
     }

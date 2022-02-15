@@ -17,7 +17,10 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"DELETE FROM Blog WHERE id = @id";
+                    cmd.CommandText = @"SELECT id,
+                                               Title,
+                                               Url
+                                               FROM Blog";
 
 
 
@@ -55,7 +58,7 @@ namespace TabloidCLI
                                                b.URL,
                                                t.Id AS TagId,
                                                t.Name
-                                          FROM Blog b 
+                                          FROM Blog b
                                                LEFT JOIN BlogTag bt on b.Id = bt.BlogId
                                                LEFT JOIN Tag t on t.Id = bt.TagId
                                          WHERE b.id = @id";
@@ -73,7 +76,7 @@ namespace TabloidCLI
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("BlogId")),
                                 Title = reader.GetString(reader.GetOrdinal("Title")),
-                                Url = reader.GetString(reader.GetOrdinal("URL"))
+                                Url = reader.GetString(reader.GetOrdinal("Url"))
                             };
                         }
 
