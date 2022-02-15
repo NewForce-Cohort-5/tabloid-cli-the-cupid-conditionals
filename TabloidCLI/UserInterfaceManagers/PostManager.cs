@@ -7,12 +7,17 @@ namespace TabloidCLI.UserInterfaceManagers
 {
     public class PostManager : IUserInterfaceManager
     {
+        private const string CONNECTION_STRING =
+       @"Data Source=localhost\SQLEXPRESS;Database=TabloidCLI;Integrated Security=True";
+
         private readonly IUserInterfaceManager _parentUI;
         private PostRepository _postRepository;
         private string _connectionString;
 
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
         {
+
+
             _parentUI = parentUI;
             _postRepository = new PostRepository(connectionString);
             _connectionString = connectionString;
@@ -26,6 +31,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 3) Add Post");
             Console.WriteLine(" 4) Edit Post");
             Console.WriteLine(" 5) Remove Post");
+            Console.WriteLine(" 6) Note Management");
             Console.WriteLine(" 0) Go Back");
 
             Console.Write("> ");
@@ -54,6 +60,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "5":
                    // Remove();
                     return this;
+                case "6": return new NoteManager(this, CONNECTION_STRING);
                 case "0":
                     return _parentUI;
                 default:
