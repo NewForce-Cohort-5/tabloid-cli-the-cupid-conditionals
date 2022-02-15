@@ -46,13 +46,13 @@ namespace TabloidCLI.UserInterfaceManagers
                         return new PostDetailManager(this, _connectionString, post.Id);
                     }
                 case "3":
-                    //Add();
+                    Add();
                     return this;
                 case "4":
                     //Edit();
                     return this;
                 case "5":
-                   // Remove();
+                    // Remove();
                     return this;
                 case "0":
                     return _parentUI;
@@ -71,7 +71,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine($"\nTitle: {post.Title}");
                 Console.WriteLine($"\nURL: {post.Url}\n");
             }
-            }
+        }
 
         private Post Choose(string prompt = null)
         {
@@ -104,62 +104,71 @@ namespace TabloidCLI.UserInterfaceManagers
             }
         }
 
-        //private void Add()
-        //{
-        //    Console.WriteLine("New Author");
-        //    Author author = new Author();
+        private void Add()
+        {
+            Console.WriteLine("New Post");
+            Post post = new Post();
 
-        //    Console.Write("First Name: ");
-        //    author.FirstName = Console.ReadLine();
+            Console.Write("Title: ");
+            post.Title = Console.ReadLine();
 
-        //    Console.Write("Last Name: ");
-        //    author.LastName = Console.ReadLine();
+            Console.Write("URL: ");
+            post.Url = Console.ReadLine();
 
-        //    Console.Write("Bio: ");
-        //    author.Bio = Console.ReadLine();
+            Console.Write("Publish Date Time: ");
+            post.PublishDateTime = DateTime.Parse(Console.ReadLine());
 
-        //    _authorRepository.Insert(author);
-        //}
+            //Console.Write("Author: ");
 
-        //private void Edit()
-        //{
-        //    Author authorToEdit = Choose("Which author would you like to edit?");
-        //    if (authorToEdit == null)
-        //    {
-        //        return;
-        //    }
+            //string userInputAuthor = ;
+            //post.Author = Console.ReadLine(); 
+            //Author findAuthor = Where(userInputAuthor == Author.Name)
 
-        //    Console.WriteLine();
-        //    Console.Write("New first name (blank to leave unchanged: ");
-        //    string firstName = Console.ReadLine();
-        //    if (!string.IsNullOrWhiteSpace(firstName))
-        //    {
-        //        authorToEdit.FirstName = firstName;
-        //    }
-        //    Console.Write("New last name (blank to leave unchanged: ");
-        //    string lastName = Console.ReadLine();
-        //    if (!string.IsNullOrWhiteSpace(lastName))
-        //    {
-        //        authorToEdit.LastName = lastName;
-        //    }
-        //    Console.Write("New bio (blank to leave unchanged: ");
-        //    string bio = Console.ReadLine();
-        //    if (!string.IsNullOrWhiteSpace(bio))
-        //    {
-        //        authorToEdit.Bio = bio;
-        //    }
+            
 
-        //    _authorRepository.Update(authorToEdit);
-        //}
+                _postRepository.Insert(post);
+          }
 
-        //private void Remove()
-        //{
-        //    Author authorToDelete = Choose("Which author would you like to remove?");
-        //    if (authorToDelete != null)
-        //    {
-        //        _authorRepository.Delete(authorToDelete.Id);
-        //    }
-        //}
+            //private void Edit()
+            //{
+            //    Author authorToEdit = Choose("Which author would you like to edit?");
+            //    if (authorToEdit == null)
+            //    {
+            //        return;
+            //    }
+
+            //    Console.WriteLine();
+            //    Console.Write("New first name (blank to leave unchanged: ");
+            //    string firstName = Console.ReadLine();
+            //    if (!string.IsNullOrWhiteSpace(firstName))
+            //    {
+            //        authorToEdit.FirstName = firstName;
+            //    }
+            //    Console.Write("New last name (blank to leave unchanged: ");
+            //    string lastName = Console.ReadLine();
+            //    if (!string.IsNullOrWhiteSpace(lastName))
+            //    {
+            //        authorToEdit.LastName = lastName;
+            //    }
+            //    Console.Write("New bio (blank to leave unchanged: ");
+            //    string bio = Console.ReadLine();
+            //    if (!string.IsNullOrWhiteSpace(bio))
+            //    {
+            //        authorToEdit.Bio = bio;
+            //    }
+
+            //    _authorRepository.Update(authorToEdit);
+            //}
+
+            //private void Remove()
+            //{
+            //    Author authorToDelete = Choose("Which author would you like to remove?");
+            //    if (authorToDelete != null)
+            //    {
+            //        _authorRepository.Delete(authorToDelete.Id);
+            //    }
+            //}
+        }
     }
-}
+
 
