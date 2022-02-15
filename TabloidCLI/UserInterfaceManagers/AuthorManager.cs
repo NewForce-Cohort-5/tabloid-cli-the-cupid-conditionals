@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TabloidCLI.Models;
+using TabloidCLI.Repositories;
 
 namespace TabloidCLI.UserInterfaceManagers
 {
@@ -16,7 +17,7 @@ namespace TabloidCLI.UserInterfaceManagers
             _authorRepository = new AuthorRepository(connectionString);
             _connectionString = connectionString;
         }
-
+        //connectionString = connecting C# and SQL
         public IUserInterfaceManager Execute()
         {
             Console.WriteLine("Author Menu");

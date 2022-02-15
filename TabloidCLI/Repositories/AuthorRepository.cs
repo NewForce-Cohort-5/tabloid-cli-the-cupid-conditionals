@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 using TabloidCLI.Models;
 using TabloidCLI.Repositories;
 
-namespace TabloidCLI
+namespace TabloidCLI.Repositories
 {
     public class AuthorRepository : DatabaseConnector, IRepository<Author>
     {
@@ -18,7 +18,7 @@ namespace TabloidCLI
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT id,
-                                               FirstName,
+                                                                                                    FirstName,
                                                LastName,
                                                Bio
                                           FROM Author";
@@ -97,7 +97,7 @@ namespace TabloidCLI
                 }
             }
         }
-
+        //this is to add
         public void Insert(Author author)
         {
             using (SqlConnection conn = Connection)
@@ -116,6 +116,7 @@ namespace TabloidCLI
             }
         }
 
+        //this is to edit
         public void Update(Author author)
         {
             using (SqlConnection conn = Connection)
