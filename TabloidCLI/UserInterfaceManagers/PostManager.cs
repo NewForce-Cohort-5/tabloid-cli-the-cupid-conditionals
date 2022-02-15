@@ -56,7 +56,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     //Edit();
                     return this;
                 case "5":
-                    // Remove();
+                    Remove();
                     return this;
                 case "0":
                     return _parentUI;
@@ -187,8 +187,8 @@ namespace TabloidCLI.UserInterfaceManagers
 
             //list of authors and select
                         
-            post.Author = AChoose();
-            post.Blog = BChoose();
+            post.Author = AChoose("Please select an author");
+            post.Blog = BChoose("Please select an blog");
             
             
 
@@ -226,14 +226,14 @@ namespace TabloidCLI.UserInterfaceManagers
             //    _authorRepository.Update(authorToEdit);
             //}
 
-            //private void Remove()
-            //{
-            //    Author authorToDelete = Choose("Which author would you like to remove?");
-            //    if (authorToDelete != null)
-            //    {
-            //        _authorRepository.Delete(authorToDelete.Id);
-            //    }
-            //}
+            private void Remove()
+            {
+                Post postToDelete = Choose("Which post would you like to remove?");
+                if (postToDelete != null)
+                {
+                    _postRepository.Delete(postToDelete.Id);
+                }
+            }
         }
     }
 
