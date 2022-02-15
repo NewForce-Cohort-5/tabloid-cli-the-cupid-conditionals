@@ -8,6 +8,8 @@ namespace TabloidCLI.UserInterfaceManagers
     public class PostManager : IUserInterfaceManager
     {
         private readonly IUserInterfaceManager _parentUI;
+        private AuthorRepository _authorRepository;
+        private BlogRepository _blogRepository;
         private PostRepository _postRepository;
         private string _connectionString;
 
@@ -15,6 +17,8 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             _parentUI = parentUI;
             _postRepository = new PostRepository(connectionString);
+            _authorRepository = new AuthorRepository(connectionString);
+            _blogRepository = new BlogRepository(connectionString);
             _connectionString = connectionString;
         }
         //connectionString = connecting C# and SQL
@@ -117,6 +121,9 @@ namespace TabloidCLI.UserInterfaceManagers
 
             Console.Write("Publish Date Time: ");
             post.PublishDateTime = DateTime.Parse(Console.ReadLine());
+            //post.PublishDateTime =DateTime.Now;
+
+            //list of authors
 
             //Console.Write("Author: ");
 
