@@ -112,10 +112,10 @@ namespace TabloidCLI.UserInterfaceManagers
 
             Console.WriteLine();
             Console.Write("New tag name (blank to leave unchanged: ");
-            string Name = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(Name))
+            string tagName = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(tagName))
             {
-                tagToEdit.Name = Name;
+                tagToEdit.Name = tagName;
             }
             
 

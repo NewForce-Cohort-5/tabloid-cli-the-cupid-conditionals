@@ -104,7 +104,9 @@ namespace TabloidCLI
                                          WHERE id = @id";
 
                     cmd.Parameters.AddWithValue("@Name", tag.Name);
-                 
+                    cmd.Parameters.AddWithValue("@id", tag.Id);
+
+
 
                     cmd.ExecuteNonQuery();
                 }
