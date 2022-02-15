@@ -64,12 +64,13 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void List()
         {
+            //Console.WriteLine("Hello");
             List<Post> posts = _postRepository.GetAll();
             foreach (Post post in posts)
             {
                 Console.WriteLine(post);
+                }
             }
-        }
 
         private Post Choose(string prompt = null)
         {
