@@ -78,9 +78,13 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.Clear();
             }
 
+            Console.WriteLine("Hello human, here is a pleasant greetings for you!");
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("");
+
             Console.WriteLine("Main Menu");
 
-            Console.WriteLine(" 1) Journal Management");
+            Console.WriteLine(" 1) My Journal Management");
             Console.WriteLine(" 2) Blog Management");
             Console.WriteLine(" 3) Author Management");
             Console.WriteLine(" 4) Post Management");
