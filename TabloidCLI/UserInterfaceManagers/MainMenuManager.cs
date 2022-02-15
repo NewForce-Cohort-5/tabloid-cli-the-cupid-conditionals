@@ -76,6 +76,10 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.Clear();
             }
 
+            Console.WriteLine("Hello human, here is a pleasant greetings for you!");
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("");
+
             Console.WriteLine("Main Menu");
 
             Console.WriteLine(" 1) My Journal Management");
