@@ -1,11 +1,19 @@
 using System;
 
+// this is to print the first menu
+
 namespace TabloidCLI.UserInterfaceManagers
 {
     public class ColorMenuManager : IUserInterfaceManager
     {
-        private const string connection_string =
-            @"data source=localhost\sqlexpress;database=tabloidcli;integrated security=true";
+        private readonly IUserInterfaceManager _parentUI;
+
+
+        public ColorMenuManager(IUserInterfaceManager parentUI, string connectionString)
+        {
+            _parentUI = parentUI;
+
+        }
 
         public IUserInterfaceManager Execute()
         {
@@ -22,60 +30,59 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 8) Dark Gray");
             Console.WriteLine(" 9) Blue");
             Console.WriteLine(" 10) Green");
-            Console.WriteLine(" 0) Continue without color");
+            Console.WriteLine(" 0) Exit");
 
             string str = Console.ReadLine();
             switch (str)
             {
                 case "1":
                     Color();
-                    break;
+                    return _parentUI;
 
                 case "2":
                     Color();
-                    break;
+                    return _parentUI;
 
                 case "3":
                     Color();
-                    break;
+                    return _parentUI;
 
                 case "4":
                     Color();
-                    break;
+                    return _parentUI;
 
                 case "5":
                     Color();
-                    break;
+                    return _parentUI;
 
                 case "6":
                     Color();
-                    break;
+                    return _parentUI;
                 case "7":
                     Color();
-                    break;
+                    return _parentUI;
                 case "8":
                     Color();
-                    break;
+                    return _parentUI;
                 case "9":
                     Color();
-                    break;
+                    return _parentUI;
                 case "10":
                     Color();
-                    break;
+                    return _parentUI;
                 case "0":
                     Console.WriteLine("--------------------");
-                    break;
-                default: Console.WriteLine("Invalid Selection");
-                    
+                    return _parentUI;
+                default:
+                    Console.WriteLine("Invalid Selection");
+                    return this;
+
             }
 
             void Color()
             {
                 Console.BackgroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), str, true);
-                ConsoleColor background = Console.BackgroundColor;
-
-                Console.WriteLine($"You chose {background} as your new background color...Enjoy!");
-                Console.Clear();
+                
             }
         }
     }
