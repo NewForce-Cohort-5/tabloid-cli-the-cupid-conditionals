@@ -18,7 +18,7 @@ namespace TabloidCLI.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT id,
-                                                                                                    FirstName,
+                                               FirstName,
                                                LastName,
                                                Bio
                                           FROM Author";
