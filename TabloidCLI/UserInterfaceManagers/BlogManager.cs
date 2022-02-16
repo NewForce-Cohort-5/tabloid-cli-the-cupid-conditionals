@@ -131,7 +131,7 @@ namespace TabloidCLI.UserInterfaceManagers
             }
 
             Console.WriteLine();
-            Console.Write("New Blog (blank to leave unchanged: ");
+            Console.Write("New Blog (blank to leave unchanged: )");
             string Title = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(Title))
             {
