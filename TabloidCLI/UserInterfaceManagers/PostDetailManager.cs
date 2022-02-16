@@ -34,77 +34,76 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine($"{post.Title} Details");
             Console.WriteLine(" 1) View");
             Console.WriteLine(" 2) View Blog Posts");
-<<<<<<< HEAD
-            //Console.WriteLine(" 3) Add Tag");
-            //Console.WriteLine(" 4) Remove Tag");
-            Console.WriteLine(" 5) Manage Notes");
-=======
-            Console.WriteLine(" 3) Add Tag");
-            Console.WriteLine(" 4) Remove Tag");
-            Console.WriteLine(" 5) Note Management");
->>>>>>> main
-            Console.WriteLine(" 0) Go Back");
+ 
+    
+     Console.WriteLine(" 5) Manage Notes");
 
-            Console.Write("> ");
-            string choice = Console.ReadLine();
-            switch (choice)
-            {
-                case "1":
-                    View();
-                    return this;
-                case "2":
-                    ViewBlogPosts();
-                    return this;
-<<<<<<< HEAD
-                //case "3":
-                //    AddTag();
-                //    return this;
-                //case "4":
-                //    RemoveTag();
-                //    return this;
-                case "5": return new NoteManager(this, CONNECTION_STRING);
-=======
-                case "3":
-                    AddTag();
-                    return this;
-                case "4":
-                    RemoveTag();
-                   return this;
->>>>>>> main
-                case "0":
-                    return _parentUI;
-                default:
-                    Console.WriteLine("Invalid Selection");
-                    return this;
-            }
-        }
+     Console.WriteLine(" 3) Add Tag");
+     Console.WriteLine(" 4) Remove Tag");
+     Console.WriteLine(" 5) Note Management");
+ 
+     Console.WriteLine(" 0) Go Back");
 
-        private void View()
-        {
-            Post post = _postRepository.Get(_postId);
-            Console.WriteLine($"Title: {post.Title}");
-            Console.WriteLine($"URL: {post.Url}");
-            Console.WriteLine($"Publis Date Time: {post.PublishDateTime}");
-            Console.WriteLine("Tags:");
-            foreach (Tag tag in post.Tags)
-            {
-                Console.WriteLine(" " + tag);
-            }
-            Console.WriteLine();
-        }
+     Console.Write("> ");
+     string choice = Console.ReadLine();
+     switch (choice)
+     {
+         case "1":
+             View();
+             return this;
+         case "2":
+             ViewBlogPosts();
+             return this;
+ 
+         //case "3":
+         //    AddTag();
+         //    return this;
+         //case "4":
+         //    RemoveTag();
+         //    return this;
+         case "5": return new NoteManager(this, CONNECTION_STRING);
 
-        private void ViewBlogPosts()
-        {
-            List<Post> posts = _postRepository.GetByAuthor(_postId);
-            foreach (Post post in posts)
-            {
-                Console.WriteLine(post);
-            }
-            Console.WriteLine();
-        }
+         case "3":
+             AddTag();
+             return this;
+         case "4":
+             RemoveTag();
+            return this;
+ 
+         case "0":
+             return _parentUI;
+         default:
+             Console.WriteLine("Invalid Selection");
+             return this;
+     }
+ }
 
-        private void AddTag()
-        {
+ private void View()
+ {
+     Post post = _postRepository.Get(_postId);
+     Console.WriteLine($"Title: {post.Title}");
+     Console.WriteLine($"URL: {post.Url}");
+     Console.WriteLine($"Publis Date Time: {post.PublishDateTime}");
+     Console.WriteLine("Tags:");
+     foreach (Tag tag in post.Tags)
+     {
+         Console.WriteLine(" " + tag);
+     }
+     Console.WriteLine();
+ }
+
+ private void ViewBlogPosts()
+ {
+     List<Post> posts = _postRepository.GetByAuthor(_postId);
+     foreach (Post post in posts)
+     {
+         Console.WriteLine(post);
+     }
+     Console.WriteLine();
+ }
+
+ private void AddTag()
+ {
 
             Post post = _postRepository.Get(_postId);
 

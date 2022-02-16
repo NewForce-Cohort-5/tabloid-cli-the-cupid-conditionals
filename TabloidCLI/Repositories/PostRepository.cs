@@ -18,21 +18,14 @@ namespace TabloidCLI.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT id,
-<<<<<<< HEAD
+
                                         Title,
                                         Url, 
                                         PublishDateTime,
                                         AuthorId,
                                         BlogId 
                                           FROM Post";
-=======
-                                                                                                 Title,
-                                                          Url, 
-                                                          PublishDateTime,
-                                                          AuthorId,
-                                                          BlogId 
-                                                  FROM Post";
->>>>>>> main
+
 
                     List<Post> posts = new List<Post>();
 

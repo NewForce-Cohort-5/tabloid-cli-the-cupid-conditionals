@@ -166,7 +166,7 @@ namespace TabloidCLI
             }
         }
 
-<<<<<<< HEAD
+
         public SearchResults<Post> SearchPosts(string tagName)
         {
             using (SqlConnection conn = Connection)
@@ -177,8 +177,8 @@ namespace TabloidCLI
                     cmd.CommandText = @"SELECT p.id,
                                                p.Title,
                                                p.Url,
-                                               p.PublishDateTime
-                                               p.AuthorId
+                                               p.PublishDateTime,
+                                               p.AuthorId,
                                                p.BlogId
                                           FROM Post p
                                                LEFT JOIN PostTag pt on p.Id = pt.PostId
@@ -193,22 +193,22 @@ namespace TabloidCLI
                         Post post = new Post()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Title = reader.GetString(reader.GetOrdinal("FirstName")),
-                            Url = reader.GetString(reader.GetOrdinal("LastName")),
-                            PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDatTime")),
-                           Author = new Author()
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("AuthorId")),
-                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                                LastName = reader.GetString(reader.GetOrdinal("LastName")),
-                                Bio = reader.GetString(reader.GetOrdinal("Bio")),
-                            },
-                            Blog = new Blog()
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("BlogId")),
-                                Title = reader.GetString(reader.GetOrdinal("BlogTitle")),
-                                Url = reader.GetString(reader.GetOrdinal("BlogUrl")),
-                            }
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            Url = reader.GetString(reader.GetOrdinal("Url")),
+                            PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime")),
+                           //Author = new Author()
+                           // {
+                           //     Id = reader.GetInt32(reader.GetOrdinal("AuthorId")),
+                           //     FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                           //     LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                           //     Bio = reader.GetString(reader.GetOrdinal("Bio")),
+                           // },
+                           // Blog = new Blog()
+                           // {
+                           //     Id = reader.GetInt32(reader.GetOrdinal("BlogId")),
+                           //     Title = reader.GetString(reader.GetOrdinal("BlogTitle")),
+                           //     Url = reader.GetString(reader.GetOrdinal("BlogUrl")),
+                           // }
                         
 
                         };
@@ -232,9 +232,9 @@ namespace TabloidCLI
                 {
                     cmd.CommandText = @"SELECT b.id,
                                                b.Title,
-                                               b.Url,
+                                               b.Url
                                           FROM Blog b
-                                               LEFT JOIN BlogTag at on b.Id = bt.BlogId
+                                               LEFT JOIN BlogTag bt on b.Id = bt.BlogId
                                                LEFT JOIN Tag t on t.Id = bt.TagId
                                          WHERE t.Name LIKE @name";
                     cmd.Parameters.AddWithValue("@name", $"%{tagName}%");
@@ -292,7 +292,7 @@ namespace TabloidCLI
             }
         }
     }
-=======
+
         //this is for post search by tag
 
         //public SearchResults<Post> SearchPosts(string tagName)
@@ -335,6 +335,5 @@ namespace TabloidCLI
 
 
             //////
-        }
->>>>>>> main
+        
 }
