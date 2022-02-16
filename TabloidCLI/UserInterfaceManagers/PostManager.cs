@@ -7,6 +7,9 @@ namespace TabloidCLI.UserInterfaceManagers
 {
     public class PostManager : IUserInterfaceManager
     {
+        private const string CONNECTION_STRING =
+       @"Data Source=localhost\SQLEXPRESS;Database=TabloidCLI;Integrated Security=True";
+
         private readonly IUserInterfaceManager _parentUI;
         private AuthorRepository _authorRepository;
         private BlogRepository _blogRepository;
@@ -15,6 +18,8 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
         {
+
+
             _parentUI = parentUI;
             _postRepository = new PostRepository(connectionString);
             _authorRepository = new AuthorRepository(connectionString);

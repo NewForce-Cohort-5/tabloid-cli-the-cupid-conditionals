@@ -7,6 +7,9 @@ namespace TabloidCLI.UserInterfaceManagers
 {
     internal class AuthorDetailManager : IUserInterfaceManager
     {
+       
+
+
         private IUserInterfaceManager _parentUI;
         private AuthorRepository _authorRepository;
         private PostRepository _postRepository;
