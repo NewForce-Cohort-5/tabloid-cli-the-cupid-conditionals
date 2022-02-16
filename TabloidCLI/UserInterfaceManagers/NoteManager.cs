@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TabloidCLI.Models;
+using TabloidCLI.Repositories;
 
 namespace TabloidCLI.UserInterfaceManagers
 {
@@ -16,7 +17,7 @@ namespace TabloidCLI.UserInterfaceManagers
             _noteRepository = new NoteRepository(connectionString);
             _connectionString = connectionString;
         }
-
+        //connectionString = connecting C# and SQL
         public IUserInterfaceManager Execute()
         {
             Console.WriteLine("Note Menu");
@@ -37,7 +38,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     Add();
                     return this;
                 case "3":
-                    Edit();
+                    //Edit();
                     return this;
                 case "4":
                     Remove();
@@ -63,7 +64,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             if (prompt == null)
             {
-                prompt = "Please choose an Note:";
+                prompt = "Please choose an Author:";
             }
 
             Console.WriteLine(prompt);
@@ -101,33 +102,39 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("Content: ");
             note.Content = Console.ReadLine();
 
-            Console.Write("PublishDateTime: ");
-            note.PublishDateTime = DateTime.Now;
-
-
-
             _noteRepository.Insert(note);
         }
 
-        private void Edit()
-        {
-            Note noteToEdit = Choose("Which note would you like to edit?");
-            if (noteToEdit == null)
-            {
-                return;
-            }
+        //private void Edit()
+        //{
+        //    Note noteToEdit = Choose("Which note would you like to edit?");
+        //    if (noteToEdit == null)
+        //    {
+        //        return;
+        //    }
 
-            Console.WriteLine();
-            Console.Write("New note name (blank to leave unchanged: ");
-            string noteName = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(noteName))
-            {
-                noteToEdit.Title = noteName;
-            }
+        //    Console.WriteLine();
+        //    Console.Write("New first name (blank to leave unchanged: ");
+        //    string firstName = Console.ReadLine();
+        //    if (!string.IsNullOrWhiteSpace(firstName))
+        //    {
+        //        authorToEdit.FirstName = firstName;
+        //    }
+        //    Console.Write("New last name (blank to leave unchanged: ");
+        //    string lastName = Console.ReadLine();
+        //    if (!string.IsNullOrWhiteSpace(lastName))
+        //    {
+        //        authorToEdit.LastName = lastName;
+        //    }
+        //    Console.Write("New bio (blank to leave unchanged: ");
+        //    string bio = Console.ReadLine();
+        //    if (!string.IsNullOrWhiteSpace(bio))
+        //    {
+        //        authorToEdit.Bio = bio;
+        //    }
 
-
-            _noteRepository.Update(noteToEdit);
-        }
+        //    _authorRepository.Update(authorToEdit);
+        //}
 
         private void Remove()
         {
