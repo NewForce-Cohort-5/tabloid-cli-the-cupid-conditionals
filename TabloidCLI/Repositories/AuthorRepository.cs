@@ -97,7 +97,8 @@ namespace TabloidCLI.Repositories
                 }
             }
         }
-        //this is to add
+
+//this is to add
         public void Insert(Author author)
         {
             using (SqlConnection conn = Connection)
@@ -116,7 +117,7 @@ namespace TabloidCLI.Repositories
             }
         }
 
-        //this is to edit
+//this is to edit
         public void Update(Author author)
         {
             using (SqlConnection conn = Connection)
