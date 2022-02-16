@@ -18,12 +18,21 @@ namespace TabloidCLI.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT id,
+<<<<<<< HEAD
                                         Title,
                                         Url, 
                                         PublishDateTime,
                                         AuthorId,
                                         BlogId 
                                           FROM Post";
+=======
+                                                                                                 Title,
+                                                          Url, 
+                                                          PublishDateTime,
+                                                          AuthorId,
+                                                          BlogId 
+                                                  FROM Post";
+>>>>>>> main
 
                     List<Post> posts = new List<Post>();
 
@@ -168,6 +177,7 @@ namespace TabloidCLI.Repositories
             }
         }
 
+        //this is to add 
         public void Insert(Post post)
         {
             using (SqlConnection conn = Connection)
@@ -190,9 +200,35 @@ cmd.Parameters.AddWithValue("@blogId", post.Blog.Id);
             }
         }
 
+//this is to edit
         public void Update(Post post)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Post 
+                                           SET Title = @title,
+                                               URL= @url,
+                                               PublishDateTime = @publishDateTime,
+
+   AuthorId = @authorId,
+    
+   BlogId = @blogId
+                                         WHERE id = @id";
+
+                    cmd.Parameters.AddWithValue("@title", post.Title);
+                    cmd.Parameters.AddWithValue("@url", post.Url);
+                    cmd.Parameters.AddWithValue("@publishDateTime", post.PublishDateTime);
+
+                    cmd.Parameters.AddWithValue("@authorId", post.Author.Id);
+                    cmd.Parameters.AddWithValue("@blogId", post.Blog.Id);
+                    cmd.Parameters.AddWithValue("@id", post.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public void Delete(int id)
@@ -209,5 +245,45 @@ cmd.Parameters.AddWithValue("@blogId", post.Blog.Id);
                 }
             }
         }
+
+        // to add tag to the post
+        public void InsertTag(Post post, Tag tag)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO PostTag (PostId, TagId)
+                                                       VALUES (@postId, @tagId)";
+                    cmd.Parameters.AddWithValue("@postId", post.Id);
+                    cmd.Parameters.AddWithValue("@tagId", tag.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        //this is to delete tags on a post
+        public void DeleteTag(int postId, int tagId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM PostTag 
+                                         WHERE PostId = @postId AND 
+                                               TagId = @tagId";
+                    cmd.Parameters.AddWithValue("@postId", postId);
+                    cmd.Parameters.AddWithValue("@tagId", tagId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
+        //
     }
 }
