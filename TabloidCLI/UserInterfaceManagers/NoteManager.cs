@@ -9,6 +9,7 @@ namespace TabloidCLI.UserInterfaceManagers
     {
         private readonly IUserInterfaceManager _parentUI;
         private NoteRepository _noteRepository;
+        private PostRepository _postRepository;
         private string _connectionString;
 
         public NoteManager(IUserInterfaceManager parentUI, string connectionString)
@@ -91,6 +92,37 @@ namespace TabloidCLI.UserInterfaceManagers
             }
         }
 
+        private Post PChoose(string prompt = null)
+        {
+            if (prompt == null)
+            {
+                prompt = "Please choose an Post:";
+            }
+
+            Console.WriteLine(prompt);
+
+            List<Post> posts = _postRepository.GetAll();
+
+            for (int i = 0; i < posts.Count; i++)
+            {
+                Post post = posts[i];
+                Console.WriteLine($" {i + 1}) {post.Title}");
+            }
+            Console.Write("> ");
+
+            string input = Console.ReadLine();
+            try
+            {
+                int choice = int.Parse(input);
+                return posts[choice - 1];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid Selection");
+                return null;
+            }
+        }
+
         private void Add()
         {
             Console.WriteLine("New Note");
@@ -101,6 +133,19 @@ namespace TabloidCLI.UserInterfaceManagers
 
             Console.Write("Content: ");
             note.Content = Console.ReadLine();
+
+            Console.Write("Date: ");
+            note.PublishDateTime = DateTime.Parse(Console.ReadLine());
+            //post.PublishDateTime =DateTime.Now;
+
+            //list of authors and select
+
+/*            note.Post = PChoose("Please select an post");
+*/
+            //list of blog and select
+           
+
+
 
             _noteRepository.Insert(note);
         }

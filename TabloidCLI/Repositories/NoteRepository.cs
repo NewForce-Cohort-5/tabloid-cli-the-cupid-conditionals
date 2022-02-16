@@ -18,7 +18,13 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"DELETE FROM Note WHERE id = @id";
+                    cmd.CommandText = @"SELECT id,
+
+                                        Title,
+                                        Content, 
+                                        PublishDateTime,
+                                        PostId 
+                                          FROM Note";
                     List<Note> notes = new List<Note>();
 
                     SqlDataReader reader = cmd.ExecuteReader();

@@ -36,7 +36,6 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 2) View Blog Posts");
  
     
-     Console.WriteLine(" 5) Manage Notes");
 
      Console.WriteLine(" 3) Add Tag");
      Console.WriteLine(" 4) Remove Tag");
