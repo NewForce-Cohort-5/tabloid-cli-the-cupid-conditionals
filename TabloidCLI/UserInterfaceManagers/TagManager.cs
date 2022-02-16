@@ -63,7 +63,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             if (prompt == null)
             {
-                prompt = "Please choose an Tag:";
+                prompt = "Please choose a Tag:";
             }
 
             Console.WriteLine(prompt);

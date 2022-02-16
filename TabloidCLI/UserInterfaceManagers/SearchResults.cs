@@ -28,7 +28,15 @@ namespace TabloidCLI.UserInterfaceManagers
 
             foreach (T result in _results)
             {
-                Console.WriteLine(" " + result);
+                try
+                {
+                    var objectValue = typeof(T).GetProperty("Title").GetValue(result);
+                              
+                    Console.WriteLine(" " + objectValue);
+                }catch (NullReferenceException ex)
+                {               
+                    Console.WriteLine(" " + result); 
+                }
             }
 
             Console.WriteLine();
