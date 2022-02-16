@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using TabloidCLI.Models;
+using TabloidCLI.UserInterfaceManagers;
 
 namespace TabloidCLI
 {
