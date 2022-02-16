@@ -53,7 +53,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     Add();
                     return this;
                 case "4":
-                    //Edit();
+                    Edit();
                     return this;
                 case "5":
                     Remove();
@@ -188,6 +188,8 @@ namespace TabloidCLI.UserInterfaceManagers
             //list of authors and select
                         
             post.Author = AChoose("Please select an author");
+
+            //list of blog and select
             post.Blog = BChoose("Please select an blog");
             
             
@@ -195,38 +197,46 @@ namespace TabloidCLI.UserInterfaceManagers
                 _postRepository.Insert(post);
           }
 
-            //private void Edit()
-            //{
-            //    Author authorToEdit = Choose("Which author would you like to edit?");
-            //    if (authorToEdit == null)
-            //    {
-            //        return;
-            //    }
+            private void Edit()
+            {
+                Post postToEdit = Choose("Which post would you like to edit?");
+                if (postToEdit == null)
+                {
+                    return;
+                }
 
-            //    Console.WriteLine();
-            //    Console.Write("New first name (blank to leave unchanged: ");
-            //    string firstName = Console.ReadLine();
-            //    if (!string.IsNullOrWhiteSpace(firstName))
-            //    {
-            //        authorToEdit.FirstName = firstName;
-            //    }
-            //    Console.Write("New last name (blank to leave unchanged: ");
-            //    string lastName = Console.ReadLine();
-            //    if (!string.IsNullOrWhiteSpace(lastName))
-            //    {
-            //        authorToEdit.LastName = lastName;
-            //    }
-            //    Console.Write("New bio (blank to leave unchanged: ");
-            //    string bio = Console.ReadLine();
-            //    if (!string.IsNullOrWhiteSpace(bio))
-            //    {
-            //        authorToEdit.Bio = bio;
-            //    }
+                Console.WriteLine();
+                Console.Write("New title (blank to leave unchanged): ");
+                string title = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(title))
+                {
+                    postToEdit.Title = title;
+                }
+                Console.Write("New URL (blank to leave unchanged): ");
+                string url = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(url))
+                    {
+                        postToEdit.Url = url;
+                    }
 
-            //    _authorRepository.Update(authorToEdit);
-            //}
+                Console.Write("New Publish Date (blank to leave unchanged: ");
+                string pubDate = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(pubDate))
+                    {
+                                        postToEdit.PublishDateTime = DateTime.Parse(pubDate);
+                    }
 
-            private void Remove()
+            //list of authors and select
+
+            postToEdit.Author = AChoose("Please select an author");
+
+            //list of blog and select
+            postToEdit.Blog = BChoose("Please select a blog");
+
+                _postRepository.Update(postToEdit);
+        }
+
+                private void Remove()
             {
                 Post postToDelete = Choose("Which post would you like to remove?");
                 if (postToDelete != null)
