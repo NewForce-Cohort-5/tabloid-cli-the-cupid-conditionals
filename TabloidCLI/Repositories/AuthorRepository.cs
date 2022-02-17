@@ -129,6 +129,7 @@ namespace TabloidCLI.Repositories
                                            SET FirstName = @firstName,
                                                LastName = @lastName,
                                                bio = @bio
+                                               
                                          WHERE id = @id";
 
                     cmd.Parameters.AddWithValue("@firstName", author.FirstName);

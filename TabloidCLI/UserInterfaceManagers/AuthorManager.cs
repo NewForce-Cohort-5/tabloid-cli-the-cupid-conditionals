@@ -147,6 +147,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 authorToEdit.Bio = bio;
             }
 
+           
             _authorRepository.Update(authorToEdit);
         }
 
