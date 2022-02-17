@@ -36,7 +36,6 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 2) View Blog Posts");
  
     
-     Console.WriteLine(" 5) Manage Notes");
 
      Console.WriteLine(" 3) Add Tag");
      Console.WriteLine(" 4) Remove Tag");
@@ -61,7 +60,7 @@ namespace TabloidCLI.UserInterfaceManagers
          //case "4":
          //    RemoveTag();
          //    return this;
-         case "5": return new NoteManager(this, CONNECTION_STRING);
+         case "5": return new NoteManager(this, CONNECTION_STRING, post.Id);
 
          case "3":
              AddTag();
