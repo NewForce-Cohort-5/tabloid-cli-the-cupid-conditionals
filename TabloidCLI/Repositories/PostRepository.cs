@@ -224,7 +224,7 @@ cmd.Parameters.AddWithValue("@blogId", post.Blog.Id);
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int PostId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -232,8 +232,8 @@ cmd.Parameters.AddWithValue("@blogId", post.Blog.Id);
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"DELETE FROM Post WHERE id = @id";
-                    cmd.Parameters.AddWithValue("@id", id);
-
+                    cmd.Parameters.AddWithValue("@id", PostId);
+                    //
                     cmd.ExecuteNonQuery();
                 }
             }

@@ -14,6 +14,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private AuthorRepository _authorRepository;
         private BlogRepository _blogRepository;
         private PostRepository _postRepository;
+        private NoteRepository _noteRepository;
         private string _connectionString;
 
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
@@ -24,6 +25,7 @@ namespace TabloidCLI.UserInterfaceManagers
             _postRepository = new PostRepository(connectionString);
             _authorRepository = new AuthorRepository(connectionString);
             _blogRepository = new BlogRepository(connectionString);
+            _noteRepository = new NoteRepository(connectionString);
             _connectionString = connectionString;
         }
         //connectionString = connecting C# and SQL
@@ -242,11 +244,30 @@ namespace TabloidCLI.UserInterfaceManagers
         }
 
                 private void Remove()
-            {
-                Post postToDelete = Choose("Which post would you like to remove?");
-                if (postToDelete != null)
                 {
-                    _postRepository.Delete(postToDelete.Id);
+                Post postToDelete = Choose("Which post would you like to remove?");
+
+                List<Note> notesToDelete = _noteRepository.GetAll();
+
+            
+            int NoteIdDelete = 0;
+                
+            foreach (Note noteToDelete in notesToDelete)
+                    {
+                if (postToDelete.Id == noteToDelete.Post.Id)
+                {  NoteIdDelete = noteToDelete.Id;
+                }
+
+                if (postToDelete != null && NoteIdDelete !=0)
+                    
+                    {
+                    _noteRepository.Delete(NoteIdDelete);
+                       _postRepository.Delete(postToDelete.Id);
+
+                }
+                    
+                   
+                    
                 }
             }
         }

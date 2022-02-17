@@ -18,13 +18,17 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT id,
+                    cmd.CommandText = @"SELECT n.id,
 
-                                        Title,
-                                        Content, 
-                                        CreateDateTime,
-                                        PostId 
-                                          FROM Note";
+                                        n.Title,
+                                        n.Content, 
+                                        n.CreateDateTime,
+                                        n.PostId as NotePostId,
+                                        p.Id as PostPostId
+                                          FROM Note n
+
+                                    LEFT JOIN Post p on p.Id = n.PostId";
+
                     List<Note> notes = new List<Note>();
 
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -37,11 +41,18 @@ namespace TabloidCLI
                             Content = reader.GetString(reader.GetOrdinal("Content")),
                             PublishDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
 
+                            Post = new Post()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("PostPostId")),
+                            }
+                                                       
 
 
                         };
                         notes.Add(note);
                     }
+
+
 
                     reader.Close();
 
@@ -139,7 +150,7 @@ namespace TabloidCLI
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int id )
         {
             using (SqlConnection conn = Connection)
             {
@@ -147,11 +158,17 @@ namespace TabloidCLI
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"DELETE FROM Note WHERE id = @id";
-                    cmd.Parameters.AddWithValue("@id", id);
-
+                                        cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
     }
 }
+
+//DELETE
+//FROM Tbl_Customer
+//WHERE UserId = [[[UserIdToDelete]]];
+
+//DELETE FROM User_History
+//WHERE UserId = [[[UserIdToDelete]]]
