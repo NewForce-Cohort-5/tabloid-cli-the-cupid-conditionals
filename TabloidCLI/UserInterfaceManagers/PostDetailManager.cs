@@ -54,22 +54,13 @@ namespace TabloidCLI.UserInterfaceManagers
          case "2":
              ViewBlogPosts();
              return this;
- 
-         //case "3":
-         //    AddTag();
-         //    return this;
-         //case "4":
-         //    RemoveTag();
-         //    return this;
-         case "5": return new NoteManager(this, CONNECTION_STRING);
-
          case "3":
              AddTag();
              return this;
          case "4":
              RemoveTag();
-            return this;
- 
+             return this;
+         case "5": return new NoteManager(this, CONNECTION_STRING);  
          case "0":
              return _parentUI;
          default:

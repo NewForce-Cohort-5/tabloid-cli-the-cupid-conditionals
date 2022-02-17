@@ -76,12 +76,20 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             List<Post> posts = _postRepository.GetByAuthor(_authorId);
             int num = 0;
-            foreach (Post post in posts)
+            if (posts.Count != 0)
             {
-                num++;
-                Console.WriteLine($" {num} :  {post.Title}");
+                foreach (Post post in posts)
+                {
+                    num++;
+                    Console.WriteLine($" {num} :  {post.Title}");
+                }
+                Console.WriteLine();
+
+            } else
+            {
+                Console.WriteLine("\nNo Blog post by the author");
             }
-            Console.WriteLine();
+                Console.WriteLine();
         }
 
         private void AddTag()

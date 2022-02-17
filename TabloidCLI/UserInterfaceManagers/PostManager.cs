@@ -75,10 +75,12 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             
             List<Post> posts = _postRepository.GetAll();
+            int num1 = 0;
             foreach (Post post in posts)
-            {
-                Console.WriteLine($"\nTitle: {post.Title}");
-                Console.WriteLine($"\nURL: {post.Url}\n");
+            {   num1++; 
+
+                Console.WriteLine($"\n{num1}. Title: {post.Title}");
+                Console.WriteLine($"\n{num1}. URL: {post.Url}\n");
             }
         }
 
@@ -180,10 +182,10 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine("New Post");
             Post post = new Post();
 
-            Console.Write("Title: ");
+            Console.Write("Post Title: ");
             post.Title = Console.ReadLine();
 
-            Console.Write("URL: ");
+            Console.Write("Post URL: ");
             post.Url = Console.ReadLine();
 
             Console.Write("Publish Date Time: ");
@@ -195,7 +197,7 @@ namespace TabloidCLI.UserInterfaceManagers
             post.Author = AChoose("Please select an author");
 
             //list of blog and select
-            post.Blog = BChoose("Please select an blog");
+            post.Blog = BChoose("Please select a blog");
             
             
 
@@ -204,42 +206,58 @@ namespace TabloidCLI.UserInterfaceManagers
 
             private void Edit()
             {
-                Post postToEdit = Choose("Which post would you like to edit?");
+                Post postToEdit = Choose("Which post would you like to edit?\n");
                 if (postToEdit == null)
                 {
                     return;
                 }
 
+                Console.WriteLine($"\nCurrent title is \"{postToEdit.Title}\"");
                 Console.WriteLine();
-                Console.Write("New title (blank to leave unchanged): ");
+                Console.Write("\nNew title (blank to leave unchanged): ");
                 string title = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(title))
                 {
                     postToEdit.Title = title;
                 }
-                Console.Write("New URL (blank to leave unchanged): ");
+                Console.WriteLine($"\nCurrent URL is \"{postToEdit.Url}\"");
+                Console.Write("\nNew URL (blank to leave unchanged): ");
                 string url = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(url))
                     {
                         postToEdit.Url = url;
                     }
-
-                Console.Write("New Publish Date (blank to leave unchanged: ");
+                Console.WriteLine($"\nCurrent publish date is \"{postToEdit.PublishDateTime}\"");
+                Console.Write("\nvNew Publish Date (blank to leave unchanged: ");
                 string pubDate = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(pubDate))
                     {
                                         postToEdit.PublishDateTime = DateTime.Parse(pubDate);
                     }
 
-            //list of authors and select
+                Console.WriteLine($"\nCurrent author is \"{postToEdit.Author.FullName}\"");
+                Console.WriteLine("Would you like to change the author?");
+                Console.WriteLine("1) Yes please\n2) No thank you");
+                        string authorYes = Console.ReadLine();
+                if (authorYes == "1")
+                {
+                //list of authors and select
 
-            postToEdit.Author = AChoose("Please select an author");
+                postToEdit.Author = AChoose("Please select an author");
 
-            //list of blog and select
-            postToEdit.Blog = BChoose("Please select a blog");
+                }
 
+                Console.WriteLine($"\nCurrent blog is \"{postToEdit.Blog.Title}\"");
+                Console.WriteLine("Would you like to change the blog?");
+                Console.WriteLine("1) Yes please\n2) No thank you");
+                string bloogYes = Console.ReadLine();
+                if (bloogYes == "1")
+                {
+                //list of blog and select
+                postToEdit.Blog = BChoose("Please select a blog");
+                }
                 _postRepository.Update(postToEdit);
-        }
+            }
 
                 private void Remove()
             {
