@@ -11,5 +11,8 @@ namespace TabloidCLI.Models
         public string Content { get; set; }
         public DateTime PublishDateTime { get; set; }
         public Post Post { get; set; }
+
+       
     }
 }
+

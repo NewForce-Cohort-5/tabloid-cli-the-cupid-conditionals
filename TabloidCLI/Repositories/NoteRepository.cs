@@ -22,7 +22,7 @@ namespace TabloidCLI
 
                                         Title,
                                         Content, 
-                                        PublishDateTime,
+                                        CreateDateTime,
                                         PostId 
                                           FROM Note";
                     List<Note> notes = new List<Note>();
@@ -35,7 +35,7 @@ namespace TabloidCLI
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Title = reader.GetString(reader.GetOrdinal("Title")),
                             Content = reader.GetString(reader.GetOrdinal("Content")),
-                            PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime")),
+                            PublishDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
 
 
 
@@ -60,7 +60,7 @@ namespace TabloidCLI
                     cmd.CommandText = @"SELECT Id AS NoteId,
                                              Title,
                                              Content,
-                                             PublishDateTime
+                                             CreateDateTime as PublishDateTime
                                           FROM Note 
                                          WHERE id = @id";
 
@@ -100,11 +100,12 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Note (Title, Content, PublishDateTime)
-                                                     VALUES (@Title, @Content, @PublishDateTime)";
+                    cmd.CommandText = @"INSERT INTO Note (Title, Content, CreateDateTime, PostId)
+                                                     VALUES (@Title, @Content, @CreateDateTime, @PostId)";
                     cmd.Parameters.AddWithValue("@Title", note.Title);
                     cmd.Parameters.AddWithValue("@Content", note.Content);
-                    cmd.Parameters.AddWithValue("@PublishDateTime", note.PublishDateTime);
+                    cmd.Parameters.AddWithValue("@CreateDateTime", note.PublishDateTime);
+                    cmd.Parameters.AddWithValue("@PostId", note.Post.Id);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -120,14 +121,16 @@ namespace TabloidCLI
                     cmd.CommandText = @"UPDATE Note 
                                            SET Title = @Title,
                                                 Content= @Content,
-                                                PublishDateTime= @PublishDateTime
-                                                
+                                                CreateDateTime= @CreateDateTime,
+                                                PostId = @postId
                                          WHERE id = @id";
 
                     cmd.Parameters.AddWithValue("@Title", note.Title);
                     cmd.Parameters.AddWithValue("@Content", note.Content);
-                    cmd.Parameters.AddWithValue("@PublishDateTime", note.PublishDateTime);
+                    cmd.Parameters.AddWithValue("@CreateDateTime", note.PublishDateTime);
                     cmd.Parameters.AddWithValue("@id", note.Id);
+                    cmd.Parameters.AddWithValue("@PostId", note.Post.Id);
+
 
 
 

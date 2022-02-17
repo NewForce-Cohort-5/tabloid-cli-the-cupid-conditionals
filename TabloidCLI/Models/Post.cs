@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace TabloidCLI.Models
@@ -14,5 +15,7 @@ namespace TabloidCLI.Models
         public Blog Blog { get; set; }
 
         public List<Tag> Tags { get; set; } = new List<Tag>();
+
     }
 }
+    

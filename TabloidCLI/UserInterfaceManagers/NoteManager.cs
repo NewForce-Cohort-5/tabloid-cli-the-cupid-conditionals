@@ -11,11 +11,14 @@ namespace TabloidCLI.UserInterfaceManagers
         private NoteRepository _noteRepository;
         private PostRepository _postRepository;
         private string _connectionString;
+        private int _postId;
 
-        public NoteManager(IUserInterfaceManager parentUI, string connectionString)
+        public NoteManager(IUserInterfaceManager parentUI, string connectionString, int postId)
         {
             _parentUI = parentUI;
+            _postId = postId;
             _noteRepository = new NoteRepository(connectionString);
+            _postRepository = new PostRepository(connectionString);
             _connectionString = connectionString;
         }
         //connectionString = connecting C# and SQL
@@ -39,7 +42,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     Add();
                     return this;
                 case "3":
-                    //Edit();
+                    Edit();
                     return this;
                 case "4":
                     Remove();
@@ -55,9 +58,16 @@ namespace TabloidCLI.UserInterfaceManagers
         private void List()
         {
             List<Note> notes = _noteRepository.GetAll();
-            foreach (Note note in notes)
+            int num = 0;
+            if (notes.Count != 0)
+                foreach (Note note in notes)
+                {
+                    num++;
+                    Console.WriteLine($"{num}) {note.Title}\n{note.Content}");
+                }
+            else
             {
-                Console.WriteLine(note);
+                Console.WriteLine("\nNo notes found\n");
             }
         }
 
@@ -65,7 +75,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             if (prompt == null)
             {
-                prompt = "Please choose an Author:";
+                prompt = "Please choose a Note:";
             }
 
             Console.WriteLine(prompt);
@@ -134,52 +144,56 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("Content: ");
             note.Content = Console.ReadLine();
 
-            Console.Write("Date: ");
-            note.PublishDateTime = DateTime.Parse(Console.ReadLine());
-            //post.PublishDateTime =DateTime.Now;
+          
+            note.PublishDateTime = DateTime.Now;
+
+            note.Post = _postRepository.Get(_postId);
+
+            
+            //post.PublishDateTime =DateTime.Now;*/
 
             //list of authors and select
 
-/*            note.Post = PChoose("Please select an post");
-*/
+            /*            note.Post = PChoose("Please select an post");
+            */
             //list of blog and select
-           
+
 
 
 
             _noteRepository.Insert(note);
         }
 
-        //private void Edit()
-        //{
-        //    Note noteToEdit = Choose("Which note would you like to edit?");
-        //    if (noteToEdit == null)
-        //    {
-        //        return;
-        //    }
+        private void Edit()
+        {
+            Note noteToEdit = Choose("Which note would you like to edit?");
+            if (noteToEdit == null)
+            {
+                return;
+            }
 
-        //    Console.WriteLine();
-        //    Console.Write("New first name (blank to leave unchanged: ");
-        //    string firstName = Console.ReadLine();
-        //    if (!string.IsNullOrWhiteSpace(firstName))
-        //    {
-        //        authorToEdit.FirstName = firstName;
-        //    }
-        //    Console.Write("New last name (blank to leave unchanged: ");
-        //    string lastName = Console.ReadLine();
-        //    if (!string.IsNullOrWhiteSpace(lastName))
-        //    {
-        //        authorToEdit.LastName = lastName;
-        //    }
-        //    Console.Write("New bio (blank to leave unchanged: ");
-        //    string bio = Console.ReadLine();
-        //    if (!string.IsNullOrWhiteSpace(bio))
-        //    {
-        //        authorToEdit.Bio = bio;
-        //    }
+            Console.WriteLine();
+            Console.Write("New title (blank to leave unchanged: ");
+            string title = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                noteToEdit.Title = title;
+            }
+            Console.Write("New content (blank to leave unchanged: ");
+            string content = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(content))
+            {
+                noteToEdit.Content = content;
+            }
 
-        //    _authorRepository.Update(authorToEdit);
-        //}
+            noteToEdit.PublishDateTime = DateTime.Now;
+
+            noteToEdit.Post = _postRepository.Get(_postId);
+
+
+
+            _noteRepository.Update(noteToEdit);
+        }
 
         private void Remove()
         {
