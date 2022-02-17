@@ -210,7 +210,7 @@ LEFT JOIN Blog b on b.Id = p.BlogId";
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Post (Title, URL, PublishDateTime, AuthorId,BlogId )
+                    cmd.CommandText = @"INSERT INTO Post (Title, URL, PublishDateTime, AuthorId, BlogId )
                                                      VALUES (@title, @url, @publishDateTime,@authorId,@blogId)";
                     cmd.Parameters.AddWithValue("@title", post.Title);
                     cmd.Parameters.AddWithValue("@url", post.Url);

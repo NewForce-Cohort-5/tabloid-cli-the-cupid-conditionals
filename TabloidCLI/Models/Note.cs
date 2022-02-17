@@ -10,6 +10,6 @@ namespace TabloidCLI.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime CreateDateTime { get; set; }
-        public Post PostId { get; set; }
+        public Post Post { get; set; }
     }
 }

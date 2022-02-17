@@ -14,6 +14,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private AuthorRepository _authorRepository;
         private BlogRepository _blogRepository;
         private PostRepository _postRepository;
+        private NoteRepository _noteRepository;
         private string _connectionString;
 
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
@@ -24,6 +25,7 @@ namespace TabloidCLI.UserInterfaceManagers
             _postRepository = new PostRepository(connectionString);
             _authorRepository = new AuthorRepository(connectionString);
             _blogRepository = new BlogRepository(connectionString);
+            _noteRepository = new NoteRepository(connectionString);
             _connectionString = connectionString;
         }
         //connectionString = connecting C# and SQL
@@ -45,14 +47,15 @@ namespace TabloidCLI.UserInterfaceManagers
                     List();
                     return this;
                 case "2":
-                    Post post = Choose();
-                    if (post == null)
+                    Post Selectedpost = Choose();
+                    
+                    if (Selectedpost == null)
                     {
                         return this;
                     }
                     else
                     {
-                        return new PostDetailManager(this, _connectionString, post.Id);
+                        return new PostDetailManager(this, _connectionString, Selectedpost.Id);
                     }
                 case "3":
                     Add();
@@ -70,10 +73,8 @@ namespace TabloidCLI.UserInterfaceManagers
                     return this;
             }
         }
-
         private void List()
         {
-            
             List<Post> posts = _postRepository.GetAll();
             int num1 = 0;
             foreach (Post post in posts)

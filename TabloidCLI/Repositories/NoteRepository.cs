@@ -104,11 +104,13 @@ FROM Note n";
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Note (Title, Content, CreateDateTime)
-                                                     VALUES (@Title, @Content, @CreateDateTime)";
+                    cmd.CommandText = @"INSERT INTO Note (Title, Content, CreateDateTime, PostId)
+                                                     VALUES (@Title, @Content, @CreateDateTime, @Post)";
                     cmd.Parameters.AddWithValue("@Title", note.Title);
                     cmd.Parameters.AddWithValue("@Content", note.Content);
                     cmd.Parameters.AddWithValue("@CreateDateTime", note.CreateDateTime);
+                    cmd.Parameters.AddWithValue("@Post", note.Post.Id);
+
                     cmd.ExecuteNonQuery();
                 }
             }

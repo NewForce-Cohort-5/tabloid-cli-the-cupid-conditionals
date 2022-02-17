@@ -9,13 +9,16 @@ namespace TabloidCLI.UserInterfaceManagers
     {
         private readonly IUserInterfaceManager _parentUI;
         private NoteRepository _noteRepository;
+        private PostRepository _postRepository;
         private string _connectionString;
-
-        public NoteManager(IUserInterfaceManager parentUI, string connectionString)
+        private int _postId;
+        public NoteManager(IUserInterfaceManager parentUI, string connectionString, int postId)
         {
             _parentUI = parentUI;
             _noteRepository = new NoteRepository(connectionString);
+            _postRepository = new PostRepository(connectionString);
             _connectionString = connectionString;
+            _postId = postId;
         }
         //connectionString = connecting C# and SQL
         public IUserInterfaceManager Execute()
@@ -59,7 +62,7 @@ namespace TabloidCLI.UserInterfaceManagers
             foreach (Note note in notes)
             {   
                 num++;
-                Console.WriteLine($"{num}) {note}");
+                Console.WriteLine($"{num}) {note.Title}\n{note.Content}");
                 }
             else
             {
@@ -98,6 +101,37 @@ namespace TabloidCLI.UserInterfaceManagers
             }
         }
 
+        //private Post PChoose(string prompt = null)
+        //{
+        //    if (prompt == null)
+        //    {
+        //        prompt = "Please choose a Note:";
+        //    }
+
+        //    Console.WriteLine(prompt);
+
+        //    List<Post> posts = _postRepository.GetAll();
+
+        //    for (int i = 0; i < posts.Count; i++)
+        //    {
+        //        Post post = posts[i];
+        //        Console.WriteLine($" {i + 1}) {post.Title}");
+        //    }
+        //    Console.Write("> ");
+
+        //    string input = Console.ReadLine();
+        //    try
+        //    {
+        //        int choice = int.Parse(input);
+        //        return posts[choice - 1];
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Invalid Selection");
+        //        return null;
+        //    }
+        //}
+
         private void Add()
         {
             Console.WriteLine("New Note");
@@ -111,6 +145,9 @@ namespace TabloidCLI.UserInterfaceManagers
 
             Console.WriteLine("Create Date: ");
             note.CreateDateTime = DateTime.Parse(Console.ReadLine());
+
+            note.Post = _postRepository.Get(_postId);
+
             _noteRepository.Insert(note);
         }
 
