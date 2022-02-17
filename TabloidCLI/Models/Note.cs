@@ -9,7 +9,7 @@ namespace TabloidCLI.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public DateTime PublishDateTime { get; set; }
+        public DateTime CreateDateTime { get; set; }
         public Post PostId { get; set; }
     }
 }

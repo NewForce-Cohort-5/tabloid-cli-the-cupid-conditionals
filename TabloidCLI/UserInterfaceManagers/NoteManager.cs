@@ -54,9 +54,16 @@ namespace TabloidCLI.UserInterfaceManagers
         private void List()
         {
             List<Note> notes = _noteRepository.GetAll();
+            int num = 0;
+            if(notes.Count != 0)
             foreach (Note note in notes)
+            {   
+                num++;
+                Console.WriteLine($"{num}) {note}");
+                }
+            else
             {
-                Console.WriteLine(note);
+                Console.WriteLine("\nNo notes found\n");
             }
         }
 
@@ -64,7 +71,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             if (prompt == null)
             {
-                prompt = "Please choose an Author:";
+                prompt = "Please choose a Note:";
             }
 
             Console.WriteLine(prompt);
@@ -102,6 +109,8 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("Content: ");
             note.Content = Console.ReadLine();
 
+            Console.WriteLine("Create Date: ");
+            note.CreateDateTime = DateTime.Parse(Console.ReadLine());
             _noteRepository.Insert(note);
         }
 
