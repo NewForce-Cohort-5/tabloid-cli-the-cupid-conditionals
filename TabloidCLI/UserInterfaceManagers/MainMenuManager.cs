@@ -12,8 +12,6 @@ namespace TabloidCLI.UserInterfaceManagers
         public IUserInterfaceManager Execute()
         {
 
-            
-
 
             Console.WriteLine("Hello human, here is a pleasant greetings for you!");
             Console.WriteLine("--------------------------------------------------");
@@ -34,7 +32,7 @@ namespace TabloidCLI.UserInterfaceManagers
             string choice = Console.ReadLine();
             switch (choice)
             {
-                case "1": throw new NotImplementedException();
+                case "1": return new JournalManager(this, CONNECTION_STRING);
                 case "2": return new BlogManager(this, CONNECTION_STRING);
                 case "3": return new AuthorManager(this, CONNECTION_STRING);
                 case "4": return new PostManager(this, CONNECTION_STRING);
