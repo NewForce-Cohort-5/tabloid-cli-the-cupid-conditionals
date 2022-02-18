@@ -161,6 +161,25 @@ namespace TabloidCLI.Repositories
             }
         }
 
+        //this is actually updating the prop IsDeleted to true
+        public void SoftDelete(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Author 
+                                        SET IsDeleted = @isDeleted 
+                                        WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@isDeleted", true);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void InsertTag(Author author, Tag tag)
         {
             using (SqlConnection conn = Connection)

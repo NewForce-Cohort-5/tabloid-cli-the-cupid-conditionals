@@ -98,7 +98,12 @@ namespace TabloidCLI.UserInterfaceManagers
             for (int i = 0; i < authors.Count; i++)
             {
                 Author author = authors[i];
-                Console.WriteLine($" {i + 1}) {author.FullName}");
+                
+                if (!author.IsDeleted)
+                {
+                    Console.WriteLine($"\n {i + 1}) {author.FullName}");
+                }
+                
             }
             Console.Write("> ");
 
@@ -129,7 +134,11 @@ namespace TabloidCLI.UserInterfaceManagers
             for (int i = 0; i < blogs.Count; i++)
             {
                 Blog blog = blogs[i];
-                Console.WriteLine($" {i + 1}) {blog.Title}");
+                if (!blog.IsDeleted)
+                {
+                    Console.WriteLine();
+                   Console.WriteLine($" {i + 1}) {blog.Title}");
+                }
             }
             Console.Write("> ");
 

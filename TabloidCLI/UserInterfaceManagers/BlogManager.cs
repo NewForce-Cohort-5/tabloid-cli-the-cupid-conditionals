@@ -72,7 +72,11 @@ namespace TabloidCLI.UserInterfaceManagers
             List<Blog> blogs = _blogRepository.GetAll();
             foreach (Blog blog in blogs)
             {
-                Console.WriteLine(blog);
+                if (!blog.IsDeleted)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(blog);
+                }
             }
         }
 
@@ -90,7 +94,10 @@ namespace TabloidCLI.UserInterfaceManagers
             for (int i = 0; i < blogs.Count; i++)
             {
                 Blog blog = blogs[i];
-                Console.WriteLine($" {i + 1}) {blog.Title}");
+                if (!blog.IsDeleted)
+                {
+                    Console.WriteLine($" {i + 1}) {blog.Title}");
+                }
             }
             Console.Write("> ");
 
@@ -147,7 +154,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Blog BlogToDelete = Choose("Which blog would you like to remove?");
             if (BlogToDelete != null)
             {
-                _blogRepository.Delete(BlogToDelete.Id);
+                _blogRepository.SoftDelete(BlogToDelete.Id);
             }
         }
     }
