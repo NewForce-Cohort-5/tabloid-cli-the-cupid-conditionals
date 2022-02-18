@@ -91,12 +91,16 @@ namespace TabloidCLI.UserInterfaceManagers
 
             List<Blog> blogs = _blogRepository.GetAll();
 
+            //int num = 1;
             for (int i = 0; i < blogs.Count; i++)
             {
                 Blog blog = blogs[i];
                 if (!blog.IsDeleted)
                 {
-                    Console.WriteLine($" {i + 1}) {blog.Title}");
+                    { }
+                    Console.WriteLine($" { i + 1}) {blog.Title}");
+                    //Console.WriteLine($" {num}) {blog.Title}");
+                    //num++;
                 }
             }
             Console.Write("> ");
