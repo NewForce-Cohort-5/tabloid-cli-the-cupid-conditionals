@@ -20,7 +20,8 @@ namespace TabloidCLI.Repositories
                     cmd.CommandText = @"SELECT id,
                                                FirstName,
                                                LastName,
-                                               Bio
+                                               Bio,
+                                               IsDeleted
                                           FROM Author";
 
                     List<Author> authors = new List<Author>();
@@ -34,6 +35,7 @@ namespace TabloidCLI.Repositories
                             FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                             LastName = reader.GetString(reader.GetOrdinal("LastName")),
                             Bio = reader.GetString(reader.GetOrdinal("Bio")),
+                            IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted")),
                         };
                         authors.Add(author);
                     }
@@ -106,11 +108,13 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Author (FirstName, LastName, Bio )
-                                                     VALUES (@firstName, @lastName, @bio)";
+                    cmd.CommandText = @"INSERT INTO Author (FirstName, LastName, Bio, IsDeleted )
+                                                     VALUES (@firstName, @lastName, @bio, @isDeleted)";
                     cmd.Parameters.AddWithValue("@firstName", author.FirstName);
                     cmd.Parameters.AddWithValue("@lastName", author.LastName);
                     cmd.Parameters.AddWithValue("@bio", author.Bio);
+                    cmd.Parameters.AddWithValue("@isDeleted", false);
+                       
 
                     cmd.ExecuteNonQuery();
                 }
