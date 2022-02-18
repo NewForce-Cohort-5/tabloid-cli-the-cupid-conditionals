@@ -9,6 +9,8 @@ namespace TabloidCLI.Models
         public string Url { get; set; }
         public List<Tag> Tags { get; set; } = new List<Tag>();
 
+        public bool IsDeleted { get; set; }
+
         //this method is to print 
         public override string ToString()
         {

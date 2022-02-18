@@ -19,7 +19,9 @@ namespace TabloidCLI
                 {
                     cmd.CommandText = @"SELECT id,
                                                Title,
-                                               Url
+                                               Url,
+                                               IsDeleted 
+
                                                FROM Blog";
 
 
@@ -34,7 +36,8 @@ namespace TabloidCLI
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Title = reader.GetString(reader.GetOrdinal("Title")),
-                            Url = reader.GetString(reader.GetOrdinal("URL"))
+                            Url = reader.GetString(reader.GetOrdinal("URL")),
+                            IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted")),
                         };
                         blogs.Add(blog);
                     }
@@ -225,6 +228,24 @@ namespace TabloidCLI
                                                        VALUES (@blogId, @tagId)";
                     cmd.Parameters.AddWithValue("@blogId", blog.Id);
                     cmd.Parameters.AddWithValue("@tagId", tag.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        //this is actually updating the prop IsDeleted to true
+        public void SoftDelete(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Blog 
+                                        SET IsDeleted = @isDeleted 
+                                        WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@isDeleted", true);
+
                     cmd.ExecuteNonQuery();
                 }
             }

@@ -10,6 +10,7 @@ namespace TabloidCLI.Models
         public string Bio { get; set; }
 
         public bool IsDeleted { get; set; }
+        //taking BIT and converting into bool
 
         //Is BIT bool or Int
         public List<Tag> Tags { get; set; } = new List<Tag>();

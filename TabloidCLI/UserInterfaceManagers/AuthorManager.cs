@@ -67,7 +67,12 @@ namespace TabloidCLI.UserInterfaceManagers
             List<Author> authors = _authorRepository.GetAll();
             foreach (Author author in authors)
             {
-                Console.WriteLine(author);
+                if (!author.IsDeleted) {
+
+                    Console.WriteLine();
+                    Console.WriteLine(author);
+                }
+                
             }
         }
 
@@ -84,8 +89,12 @@ namespace TabloidCLI.UserInterfaceManagers
 
             for (int i = 0; i < authors.Count; i++)
             {
-                Author author = authors[i];
-                Console.WriteLine($" {i + 1}) {author.FullName}");
+                
+                    Author author = authors[i];
+                if (!author.IsDeleted)
+                {
+                    Console.WriteLine($" {i + 1}) {author.FullName}");
+                }
             }
             Console.Write("> ");
 
@@ -156,7 +165,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Author authorToDelete = Choose("Which author would you like to remove?");
             if (authorToDelete != null)
             {
-                _authorRepository.Delete(authorToDelete.Id);
+                _authorRepository.SoftDelete(authorToDelete.Id);
             }
         }
     }
